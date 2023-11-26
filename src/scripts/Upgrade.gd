@@ -10,6 +10,7 @@ export var quantity = 0 setget set_quantity
 export var recepie = {}
 export var texture: Texture setget set_texture
 export var speed: float = 0 setget set_speed
+export var upgrade_enabled = false setget enable_upgrade
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,6 +32,7 @@ func set_texture(value: Texture):
 	if value == null:
 		return
 	TextureRect.texture = value
+	texture = value
 
 func set_title(value: String):
 	var TitleLabel = $Panel/HBoxContainer/Info/TitleLabel
@@ -62,3 +64,8 @@ func get_upgrade_recepie():
 
 func upgrade(qty):
 	set_quantity(quantity + qty)
+
+func enable_upgrade(enabled):
+	var Button = $Panel/HBoxContainer/Info/UpgradeButton
+	Button.disabled = !enabled
+	upgrade_enabled = enabled

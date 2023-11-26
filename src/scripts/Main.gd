@@ -3,7 +3,8 @@ extends VBoxContainer
 # Mass increment per second
 var speed: float = 0
 # Current mass
-var mass: float = 0 setget set_mass
+var mass: float = 1000 setget set_mass
+var body_idx = 0
 
 onready var HUD = $Top/HUD
 onready var Ungrades = $Bottom/Upgrades
@@ -25,6 +26,7 @@ func set_mass(val: float):
 		return
 	HUD.mass = val
 	mass = val
+	update_upgrade_buttons()
 
 func set_speed(val: float):
 	if not HUD:
@@ -41,13 +43,31 @@ func get_total_speed():
 
 
 func _on_Upgrades_upgrade(body, qty):
-	print(body.recepie)
 	var recepie = body.recepie
 	for required_body in recepie:
 		var quantity = recepie[required_body]*qty
-		print(required_body, quantity)
 		if required_body == 'dust':
 			if mass < quantity:
 				return
 			set_mass(mass - quantity)
 			body.upgrade(1)
+		print(body.texture)
+		set_body_texture(body.texture)
+
+func can_upgrade(body, qty):
+	var recepie = body.recepie
+	for required_body in recepie:
+		var quantity = recepie[required_body]*qty
+		if required_body == 'dust':
+			if mass < quantity:
+				return false
+	return true
+
+func update_upgrade_buttons():
+	var upgrades = Ungrades.upgrades
+	for upgrade in upgrades:
+		var can_up = can_upgrade(upgrade, 1)
+		upgrade.enable_upgrade(can_up)
+
+func set_body_texture(texture: Texture):
+	$Top/Body.body_texture = texture
