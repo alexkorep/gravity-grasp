@@ -1,0 +1,13 @@
+{
+  "name": "gravity-grasp",
+  "version": "1.0.0",
+  "description": "Cosmic Clicker is a simple yet captivating incremental clicker game where you start as a small asteroid and gather mass to become a planet, star, and eventually a galaxy. It's designed to be simple enough for indie developers to implement within a couple of days.",
+  "scripts": {
+    "deploy": "gh-pages -d dist"
+  },
+  "author": "Alexey Korepanov",
+  "license": "MIT",
+  "dependencies": {
+    "gh-pages": "^6.1.0"
+  }
+}

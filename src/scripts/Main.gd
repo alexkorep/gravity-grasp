@@ -3,7 +3,7 @@ extends VBoxContainer
 # Mass increment per second
 var speed: float = 0
 # Current mass
-var mass: float = 1000 setget set_mass
+var mass: float = 0 setget set_mass
 var body_idx = 0
 
 onready var HUD = $Top/HUD
