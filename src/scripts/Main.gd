@@ -38,3 +38,16 @@ func get_total_speed():
 	for upgrade in upgrades:
 		total_speed += upgrade.get_total_speed()
 	return total_speed
+
+
+func _on_Upgrades_upgrade(body, qty):
+	print(body.recepie)
+	var recepie = body.recepie
+	for required_body in recepie:
+		var quantity = recepie[required_body]*qty
+		print(required_body, quantity)
+		if required_body == 'dust':
+			if mass < quantity:
+				return
+			set_mass(mass - quantity)
+			body.upgrade(1)

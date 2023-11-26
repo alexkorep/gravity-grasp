@@ -1,11 +1,13 @@
 extends Control
 class_name Upgrade
 
+signal upgrade(body)
+
 export var title = "Title"
 export var id = "ID"
 export var description = "Description"
 export var quantity = 0 setget set_quantity
-var recepie = {}
+export var recepie = {}
 export var texture: Texture setget set_texture
 export var speed: float = 0 setget set_speed
 
@@ -13,6 +15,14 @@ export var speed: float = 0 setget set_speed
 func _ready():
 	set_quantity(quantity)
 	set_speed(speed)
+	var RecepieLabel = $Panel/HBoxContainer/Info/RecepieLabel
+	RecepieLabel.text = get_recepie_text()
+
+func get_recepie_text():
+	var text = ''
+	for item in recepie:
+		text += NumberFormatter.format_large_number(recepie[item]) + ' ' + item + '\n'
+	return text
 
 func set_texture(value: Texture):
 	var TextureRect = $Panel/HBoxContainer/TextureRect
@@ -38,4 +48,11 @@ func set_quantity(val: int):
 	QuantityLabel.text = NumberFormatter.format_large_number(quantity)
 
 func _on_Button_pressed():
-	set_quantity(quantity + 1)
+	# set_quantity(quantity + 1)
+	emit_signal("upgrade", self, 1)
+
+func get_upgrade_recepie():
+	return recepie
+
+func upgrade(qty):
+	set_quantity(quantity + qty)

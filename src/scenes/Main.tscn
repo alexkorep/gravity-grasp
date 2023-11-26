@@ -29,3 +29,4 @@ size_flags_vertical = 3
 [node name="Upgrades" parent="Bottom" instance=ExtResource( 2 )]
 
 [connection signal="clicked" from="Top/Body" to="." method="_on_Body_clicked"]
+[connection signal="upgrade" from="Bottom/Upgrades" to="." method="_on_Upgrades_upgrade"]

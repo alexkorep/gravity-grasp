@@ -50,10 +50,16 @@ margin_right = 238.0
 margin_bottom = 50.0
 text = "Description"
 
-[node name="Button" type="Button" parent="Panel/HBoxContainer/Info"]
+[node name="RecepieLabel" type="Label" parent="Panel/HBoxContainer/Info"]
 margin_top = 54.0
 margin_right = 238.0
-margin_bottom = 74.0
+margin_bottom = 68.0
+text = "Description"
+
+[node name="Button" type="Button" parent="Panel/HBoxContainer/Info"]
+margin_top = 72.0
+margin_right = 238.0
+margin_bottom = 92.0
 text = "Upgrade"
 
 [connection signal="pressed" from="Panel/HBoxContainer/Info/Button" to="." method="_on_Button_pressed"]
