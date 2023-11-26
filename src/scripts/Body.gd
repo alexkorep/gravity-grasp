@@ -2,9 +2,6 @@ extends Control
 
 signal clicked
 
-export var speed: float = 100.0 setget set_speed
-export var mass: float = 100.0 setget set_mass
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -19,10 +16,3 @@ func _on_MarginContainer_gui_input(event:InputEvent):
 	if event is InputEventMouseButton and event.pressed:
 		emit_signal("clicked")
 
-func set_speed(value: float):
-	var SpeedLabel = $HUDTop/SpeedLabel
-	SpeedLabel.text = str(value) + 'g/s'
-
-func set_mass(value: float):
-	var MassLabel = $HUDTop/MassLabel
-	MassLabel.text = str(value) + 'g'
