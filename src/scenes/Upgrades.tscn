@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/Upgrade.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/003-moon.png" type="Texture" id=2]
+[ext_resource path="res://images/001-asteroid.png" type="Texture" id=3]
+[ext_resource path="res://images/008-sun.png" type="Texture" id=4]
+[ext_resource path="res://images/007-jupiter.png" type="Texture" id=5]
+[ext_resource path="res://images/004-planetoid.png" type="Texture" id=6]
+[ext_resource path="res://images/005-planet.png" type="Texture" id=7]
+
+[node name="Upgrades" type="ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 468.0
+margin_bottom = 740.0
+size_flags_horizontal = 3
+
+[node name="UpgradeAsteroid" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_right = 468.0
+texture = ExtResource( 3 )
+
+[node name="UpgradeMoon" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_top = 124.0
+margin_right = 468.0
+margin_bottom = 244.0
+texture = ExtResource( 2 )
+
+[node name="UpgradePlanetoid" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_top = 248.0
+margin_right = 468.0
+margin_bottom = 368.0
+texture = ExtResource( 6 )
+
+[node name="UpgradePlanet" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_top = 372.0
+margin_right = 468.0
+margin_bottom = 492.0
+texture = ExtResource( 7 )
+
+[node name="UpgradeJupiter" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_top = 496.0
+margin_right = 468.0
+margin_bottom = 616.0
+texture = ExtResource( 5 )
+
+[node name="UpgradeSun" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_top = 620.0
+margin_right = 468.0
+margin_bottom = 740.0
+texture = ExtResource( 4 )

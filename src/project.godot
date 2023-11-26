@@ -8,11 +8,28 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Control",
+"class": "Upgrade",
+"language": "GDScript",
+"path": "res://scripts/Upgrade.gd"
+} ]
+_global_script_class_icons={
+"Upgrade": ""
+}
+
 [application]
 
 config/name="Gravity's grasp"
 run/main_scene="res://scenes/Main.tscn"
+boot_splash/image="res://splashscreen.png"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=480
+window/size/height=640
+window/handheld/orientation="portrait"
 
 [gui]
 
