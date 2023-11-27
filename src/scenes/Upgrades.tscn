@@ -38,6 +38,7 @@ title = "Meteoroid"
 texture = ExtResource( 3 )
 speed = 1.0
 source_body = 1
+source_quantity = 3
 
 [node name="Asteroid" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0

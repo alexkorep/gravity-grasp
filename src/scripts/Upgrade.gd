@@ -9,7 +9,7 @@ enum Units { GRAM, ITEM }
 
 export(CelestialBody) var body_type
 export(Units) var units = Units.ITEM
-export var title = "Title" setget set_title
+export var title = 'Title' setget set_title, get_title
 export var description = "Description"
 export var quantity = 0 setget set_quantity
 export var texture: Texture setget set_texture
@@ -25,14 +25,13 @@ func _ready():
 	set_speed(speed)
 	var RecepieLabel = $Panel/HBoxContainer/Info/RecepieLabel
 	RecepieLabel.text = get_recepie_text()
+	print('title: ' + title)
 
 func get_recepie_text():
-	var text = ''
-	# for item in recepie:
-	# 	if text != '':
-	# 		text += ' + '
-	# 	text += NumberFormatter.format_large_number(recepie[item]) + ' ' + item
-	return text + ' -> +1'
+	var src = get_source_body()
+	if src == null:
+		return ''
+	return str(source_quantity) + ' ' + src.title + ' -> +1'
 
 func set_texture(value: Texture):
 	var TextureRect = $Panel/HBoxContainer/TextureRect
@@ -44,6 +43,10 @@ func set_texture(value: Texture):
 func set_title(value: String):
 	var TitleLabel = $Panel/HBoxContainer/Info/TitleLabel
 	TitleLabel.text = value
+	title = value
+
+func get_title():
+	return title
 
 func get_total_speed():
 	# TODO make speed progressively slower with each upgrade
@@ -68,33 +71,33 @@ func set_quantity(val: int):
 	QuantityLabel.text = 'Qty: ' + NumberFormatter.format_large_number(quantity)
 
 func _on_Button_pressed():
-	# set_quantity(quantity + 1)
-	emit_signal("upgrade", self, 1)
-
-func get_upgrade_recepie():
-	return '' #recepie
+	upgrade(1)
 
 func upgrade(qty):
-	set_quantity(quantity + qty)
+	var required_source_quantity = source_quantity*qty
+	var sibling = get_source_body()
+	if sibling.quantity >= required_source_quantity:
+		set_quantity(quantity + qty)
+		sibling.set_quantity(sibling.quantity - required_source_quantity)
 
 func enable_upgrade(enabled):
 	var Button = $Panel/HBoxContainer/Info/UpgradeButton
 	Button.disabled = !enabled
 	upgrade_enabled = enabled
 
-func check_upgrade():
+func get_source_body():
 	var siblings = get_parent().get_children()
 	for sibling in siblings:
 		if sibling != self:
-			if sibling.body_type == source_body and sibling.quantity >= source_quantity:
-				enable_upgrade(true)
-				return
-	enable_upgrade(false)
-
-# func get_all_bodies():
-# 	var siblings = get_siblings()
-# 	var bodies = []
-# 	for sibling in siblings:
-# 		if sibling is Upgrade and sibling != self:
-# 			bodies.append(sibling)
-# 	return bodies
+			if sibling.body_type == source_body:
+				return sibling
+	return null
+	
+func check_upgrade():
+	# TODO check if can upgrade for qty > 1
+	var sibling = get_source_body()
+	if sibling != null:
+		enable_upgrade(sibling.quantity >= source_quantity)
+	else:
+		var Button = $Panel/HBoxContainer/Info/UpgradeButton
+		Button.visible = false
