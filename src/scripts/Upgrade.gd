@@ -2,6 +2,7 @@ extends Control
 class_name Upgrade
 
 signal upgrade(body)
+signal dust_collected(body, amount)
 
 enum CelestialBody { NONE, DUST, METEROID, ASTEROID, MOON, PLANETOID, PLANET, JUPITER, SUN, NEUTRON_STAR, BLACK_HOLE }
 enum Units { GRAM, ITEM }
@@ -45,11 +46,16 @@ func set_title(value: String):
 	TitleLabel.text = value
 
 func get_total_speed():
+	# TODO make speed progressively slower with each upgrade
 	return speed*quantity
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	check_upgrade()
+
+	var dust_amount = get_total_speed()*delta
+	if dust_amount > 0:
+		emit_signal("dust_collected", self, dust_amount)
 
 func set_speed(val: float):
 	var SpeedLabel = $Panel/HBoxContainer/Info/SpeedLabel

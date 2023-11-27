@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-# Mass increment per second
+# Dust mass collection (g) per second
 var speed: float = 0
 # Current mass
 var mass: float = 0 setget set_mass
@@ -15,11 +15,13 @@ func _ready():
 
 func _process(delta):
 	var spd = get_total_speed()
-	set_mass(mass + spd * delta)
+	# set_mass(mass + spd * delta)
 	set_speed(spd)
+	pass
 
 func _on_Body_clicked():
-	set_mass(mass + 1)
+	#set_mass(mass + 1)
+	Ungrades.add_dust(1)
 
 func set_mass(val: float):
 	if not HUD:
@@ -36,7 +38,7 @@ func set_speed(val: float):
 
 func get_total_speed():
 	var total_speed = 0
-	var upgrades = Ungrades.upgrades
+	var upgrades = Ungrades.get_upgrades()
 	for upgrade in upgrades:
 		total_speed += upgrade.get_total_speed()
 	return total_speed

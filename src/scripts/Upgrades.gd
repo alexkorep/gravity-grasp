@@ -1,5 +1,4 @@
 extends ScrollContainer
-export var upgrades = [] setget ,get_upgrades
 
 onready var Upgrades = $VBoxContainer
 
@@ -14,11 +13,16 @@ func get_upgrades():
 		return []
 	return Upgrades.get_children()
 
-func get_upgrade_by_name(name):
-	for upgrade in upgrades:
-		if upgrade.name == name:
-			return upgrade
-	return null
 
 func _on_body_upgrade(body, qty):
 	emit_signal("upgrade", body, qty)
+
+func _on_dust_collected(body, amount):
+	add_dust(amount)
+
+func add_dust(amount):
+	print("add_dust", amount)
+	var upgrades = get_upgrades()
+	for upgrade in upgrades:
+		if upgrade.body_type == upgrade.CelestialBody.DUST:
+			upgrade.quantity += amount
