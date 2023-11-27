@@ -17,11 +17,7 @@ func get_upgrades():
 func _on_body_upgrade(body, qty):
 	emit_signal("upgrade", body, qty)
 
-func _on_dust_collected(body, amount):
-	add_dust(amount)
-
 func add_dust(amount):
-	print("add_dust", amount)
 	var upgrades = get_upgrades()
 	for upgrade in upgrades:
 		if upgrade.body_type == upgrade.CelestialBody.DUST:
