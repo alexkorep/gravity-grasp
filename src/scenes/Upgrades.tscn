@@ -16,76 +16,94 @@ anchor_bottom = 1.0
 script = ExtResource( 8 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_bottom = 864.0
+margin_right = 468.0
+margin_bottom = 1112.0
 size_flags_horizontal = 3
+
+[node name="Dust" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_right = 468.0
+units = 0
+title = "Meteoroid"
+texture = ExtResource( 3 )
 
 [node name="Meteoroid" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
+margin_top = 124.0
 margin_right = 468.0
+margin_bottom = 244.0
+body_type = 1
 title = "Meteoroid"
-recepie = {
-"dust": 20.0
-}
 texture = ExtResource( 3 )
 speed = 1.0
 
 [node name="Asteroid" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_top = 124.0
+margin_top = 248.0
 margin_right = 468.0
-margin_bottom = 244.0
+margin_bottom = 368.0
+body_type = 2
 title = "Asteroid"
-recepie = {
-"dust": 200.0
-}
 texture = ExtResource( 9 )
 speed = 12.0
 
 [node name="Moon" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_top = 248.0
+margin_top = 372.0
 margin_right = 468.0
-margin_bottom = 368.0
+margin_bottom = 492.0
+body_type = 3
 title = "Moon"
 texture = ExtResource( 2 )
 speed = 287.0
 
 [node name="Planetoid" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_top = 372.0
+margin_top = 496.0
 margin_right = 468.0
-margin_bottom = 492.0
+margin_bottom = 616.0
+body_type = 4
 title = "Planetoid"
 texture = ExtResource( 6 )
 speed = 1480.0
 
 [node name="Planet" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_top = 496.0
+margin_top = 620.0
 margin_right = 468.0
-margin_bottom = 616.0
+margin_bottom = 740.0
+body_type = 5
 title = "Planet"
 texture = ExtResource( 7 )
 speed = 3472.0
 
 [node name="Jupiter" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_top = 620.0
+margin_top = 744.0
 margin_right = 468.0
-margin_bottom = 740.0
+margin_bottom = 864.0
+body_type = 6
 title = "Jupiter"
 texture = ExtResource( 5 )
 speed = 1.1034e+06
 
 [node name="Sun" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_top = 744.0
+margin_top = 868.0
 margin_right = 468.0
-margin_bottom = 864.0
+margin_bottom = 988.0
+body_type = 7
 title = "Sun"
 texture = ExtResource( 4 )
 speed = 1.14576e+09
 
+[node name="Upgrade" parent="VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+margin_top = 992.0
+margin_right = 468.0
+margin_bottom = 1112.0
+
+[connection signal="upgrade" from="VBoxContainer/Dust" to="." method="_on_body_upgrade"]
 [connection signal="upgrade" from="VBoxContainer/Meteoroid" to="." method="_on_body_upgrade"]
 [connection signal="upgrade" from="VBoxContainer/Asteroid" to="." method="_on_body_upgrade"]
 [connection signal="upgrade" from="VBoxContainer/Moon" to="." method="_on_body_upgrade"]

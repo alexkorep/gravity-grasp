@@ -3,14 +3,20 @@ class_name Upgrade
 
 signal upgrade(body)
 
+enum CelestialBody { NONE, DUST, METEROID, ASTEROID, MOON, PLANETOID, PLANET, JUPITER, SUN, NEUTRON_STAR, BLACK_HOLE }
+enum Units { GRAM, ITEM }
+
+export(CelestialBody) var body_type
+export(Units) var units = Units.ITEM
 export var title = "Title" setget set_title
-export var id = "ID"
 export var description = "Description"
 export var quantity = 0 setget set_quantity
-export var recepie = {}
 export var texture: Texture setget set_texture
 export var speed: float = 0 setget set_speed
 export var upgrade_enabled = false setget enable_upgrade
+
+export(CelestialBody) var source_body
+export var source_quantity = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,10 +27,10 @@ func _ready():
 
 func get_recepie_text():
 	var text = ''
-	for item in recepie:
-		if text != '':
-			text += ' + '
-		text += NumberFormatter.format_large_number(recepie[item]) + ' ' + item
+	# for item in recepie:
+	# 	if text != '':
+	# 		text += ' + '
+	# 	text += NumberFormatter.format_large_number(recepie[item]) + ' ' + item
 	return text + ' -> +1'
 
 func set_texture(value: Texture):
@@ -42,8 +48,8 @@ func get_total_speed():
 	return speed*quantity
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	check_upgrade()
 
 func set_speed(val: float):
 	var SpeedLabel = $Panel/HBoxContainer/Info/SpeedLabel
@@ -60,7 +66,7 @@ func _on_Button_pressed():
 	emit_signal("upgrade", self, 1)
 
 func get_upgrade_recepie():
-	return recepie
+	return '' #recepie
 
 func upgrade(qty):
 	set_quantity(quantity + qty)
@@ -69,3 +75,20 @@ func enable_upgrade(enabled):
 	var Button = $Panel/HBoxContainer/Info/UpgradeButton
 	Button.disabled = !enabled
 	upgrade_enabled = enabled
+
+func check_upgrade():
+	var siblings = get_parent().get_children()
+	for sibling in siblings:
+		if sibling != self:
+			if sibling.body_type == source_body and sibling.quantity >= source_quantity:
+				enable_upgrade(true)
+				return
+	enable_upgrade(false)
+
+# func get_all_bodies():
+# 	var siblings = get_siblings()
+# 	var bodies = []
+# 	for sibling in siblings:
+# 		if sibling is Upgrade and sibling != self:
+# 			bodies.append(sibling)
+# 	return bodies
