@@ -1,7 +1,10 @@
-extends VBoxContainer
+extends Control
 
-onready var HUD = $Top/HUD
-onready var Ungrades = $Bottom/Upgrades
+onready var HUD = $MainContainer/Top/HUD
+onready var Ungrades = $MainContainer/Bottom/Upgrades
+onready var Settings = $Settings
+
+export var save_file_name = "user://save_game.dat"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -63,4 +66,47 @@ func _on_Upgrades_upgrade(body, qty):
 # 		upgrade.enable_upgrade(can_up)
 
 func set_body_texture(texture: Texture):
-	$Top/Body.body_texture = texture
+	$MainContainer/Top/Body.body_texture = texture
+
+
+func delete_game_file():
+	var dir = Directory.new()
+	dir.remove(save_file_name)
+	
+func save_game():
+	var save_game = File.new()
+	var save_data = {} # Your game data as a dictionary
+
+	# TODO Populate save_data with game information
+
+	save_game.open(save_file_name, File.WRITE)
+	save_game.store_var(save_data)
+	save_game.close()
+	
+func save_game_exists():
+	var save_game = File.new()
+	if save_game.file_exists(save_file_name):
+			return true
+	return false
+	
+func load_game():
+	var save_game = File.new()
+	if not save_game.file_exists(save_file_name):
+		return false
+
+	save_game.open(save_file_name, File.READ)
+	var save_data = save_game.get_var()
+	save_game.close()
+	
+	# TODO Now extract the data and set it in your game
+	return true
+
+func _on_HUD_show_settings():
+	Settings.show()
+
+func _on_Settings_new_game():
+	delete_game_file()
+	#Settings.hide()
+	#$MainContainer/Top/Body.reset()
+	#Ungrades.reset()
+	#HUD.reset()

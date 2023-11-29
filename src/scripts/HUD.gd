@@ -1,5 +1,7 @@
 extends Control
 
+signal show_settings()
+
 export var speed: float = 100.0 setget set_speed
 export var mass: float = 100.0 setget set_mass
 
@@ -20,3 +22,7 @@ func set_speed(value: float):
 func set_mass(value: float):
 	var MassLabel = $HUDTop/MassLabel
 	MassLabel.text = NumberFormatter.format_large_number(value) + 'g'
+
+func _on_SettingsButton_pressed():
+	emit_signal('show_settings')
+	print('Settings button pressed')

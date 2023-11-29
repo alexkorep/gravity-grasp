@@ -24,6 +24,7 @@ config/name="Gravity's grasp"
 run/main_scene="res://scenes/Main.tscn"
 boot_splash/image="res://splashscreen.png"
 config/icon="res://icon.png"
+config/version="0.1.0"
 
 [autoload]
 
