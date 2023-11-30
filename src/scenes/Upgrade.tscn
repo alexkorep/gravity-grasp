@@ -8,11 +8,13 @@
 anchor_right = 1.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 0, 120 )
+mouse_filter = 1
 script = ExtResource( 2 )
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 theme = ExtResource( 3 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
@@ -36,30 +38,35 @@ size_flags_horizontal = 3
 [node name="TitleLabel" type="Label" parent="Panel/HBoxContainer/Info"]
 margin_right = 238.0
 margin_bottom = 14.0
+mouse_filter = 1
 text = "Description"
 
 [node name="SpeedLabel" type="Label" parent="Panel/HBoxContainer/Info"]
 margin_top = 18.0
 margin_right = 238.0
 margin_bottom = 32.0
+mouse_filter = 1
 text = "Description"
 
 [node name="QuantityLabel" type="Label" parent="Panel/HBoxContainer/Info"]
 margin_top = 36.0
 margin_right = 238.0
 margin_bottom = 50.0
+mouse_filter = 1
 text = "Description"
 
 [node name="RecepieLabel" type="Label" parent="Panel/HBoxContainer/Info"]
 margin_top = 54.0
 margin_right = 238.0
 margin_bottom = 68.0
+mouse_filter = 1
 text = "Description"
 
 [node name="UpgradeButton" type="Button" parent="Panel/HBoxContainer/Info"]
 margin_top = 72.0
 margin_right = 238.0
 margin_bottom = 92.0
+mouse_filter = 1
 text = "Upgrade"
 
 [connection signal="pressed" from="Panel/HBoxContainer/Info/UpgradeButton" to="." method="_on_Button_pressed"]

@@ -21,11 +21,6 @@ func _process(_delta):
 func _on_Body_clicked():
 	Ungrades.add_dust(1)
 
-func set_mass(val: float):
-	if not HUD:
-		return
-	HUD.mass = val
-
 func set_speed(val: float):
 	if not HUD:
 		return

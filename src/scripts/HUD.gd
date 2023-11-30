@@ -3,7 +3,6 @@ extends Control
 signal show_settings()
 
 export var speed: float = 100.0 setget set_speed
-export var mass: float = 100.0 setget set_mass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,11 +16,7 @@ func _ready():
 
 func set_speed(value: float):
 	var SpeedLabel = $HUDTop/SpeedLabel
-	SpeedLabel.text = NumberFormatter.format_large_number(value) + 'g/s'
-
-func set_mass(value: float):
-	var MassLabel = $HUDTop/MassLabel
-	MassLabel.text = NumberFormatter.format_large_number(value) + 'g'
+	SpeedLabel.text = 'Dust: ' + NumberFormatter.format_large_number(value) + 'g/s'
 
 func _on_SettingsButton_pressed():
 	emit_signal('show_settings')

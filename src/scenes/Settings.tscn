@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/Settings.gd" type="Script" id=1]
-[ext_resource path="res://images/Settings/settings-background.png" type="Texture" id=2]
+[ext_resource path="res://images/background.png" type="Texture" id=2]
 
 [node name="Settings" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 popup_exclusive = true
