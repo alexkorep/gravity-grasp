@@ -34,7 +34,11 @@ size_flags_vertical = 3
 [node name="Upgrades" parent="MainContainer/Bottom" instance=ExtResource( 2 )]
 
 [node name="Settings" parent="." instance=ExtResource( 5 )]
-visible = false
 
+[node name="SaveGameTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="clicked" from="MainContainer/Top/Body" to="." method="_on_Body_clicked"]
 [connection signal="show_settings" from="MainContainer/Top/HUD" to="." method="_on_HUD_show_settings"]
 [connection signal="new_game" from="Settings" to="." method="_on_Settings_new_game"]
+[connection signal="timeout" from="SaveGameTimer" to="." method="_on_SaveGameTimer_timeout"]

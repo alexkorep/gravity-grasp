@@ -1,8 +1,6 @@
 extends Control
 class_name Upgrade
 
-signal upgrade(body)
-
 enum CelestialBody { NONE, DUST, METEROID, ASTEROID, MOON, PLANETOID, PLANET, JUPITER, SUN, NEUTRON_STAR, BLACK_HOLE }
 enum Units { GRAM, ITEM }
 
@@ -106,3 +104,15 @@ func check_upgrade():
 	else:
 		var Button = $Panel/HBoxContainer/Info/UpgradeButton
 		Button.visible = false
+
+func get_save_data():
+	var data = {}
+	data['body_type'] = body_type
+	data['quantity'] = quantity
+	return data
+
+func load_save_data(data):
+	set_quantity(data['quantity'])
+
+func reset():
+	set_quantity(0)
