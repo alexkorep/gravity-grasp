@@ -3,6 +3,7 @@ extends Control
 onready var HUD = $MainContainer/HUD
 onready var Ungrades = $MainContainer/Upgrades
 onready var Settings = $Settings
+onready var Body = $MainContainer/Body
 
 export var save_file_name = "user://save_game.dat"
 
@@ -86,3 +87,7 @@ func _on_SaveGameTimer_timeout():
 
 func _on_HUD_on_settings_pressed():
 	Settings.show()
+
+
+func _on_Upgrades_on_first_upgrade(body):
+	Body.body_texture = body.texture

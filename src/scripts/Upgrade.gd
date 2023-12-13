@@ -15,6 +15,8 @@ export var speed: float = 0 setget set_speed
 export(CelestialBody) var source_body
 export var source_quantity = 100
 
+signal on_body_upgrade(body, qty)
+
 var upgrade_buttons = []
 
 # Called when the node enters the scene tree for the first time.
@@ -101,6 +103,7 @@ func upgrade(qty):
 	if sibling.quantity >= required_source_quantity:
 		set_quantity(quantity + qty)
 		sibling.set_quantity(sibling.quantity - required_source_quantity)
+		emit_signal('on_body_upgrade', self, qty)
 
 func enable_upgrade_buttons():
 	var sibling = get_source_body()

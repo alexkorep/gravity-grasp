@@ -19,7 +19,7 @@ anchor_bottom = 1.0
 [node name="HUD" parent="MainContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 480.0
+margin_right = 360.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 mouse_filter = 2
@@ -28,16 +28,16 @@ mouse_filter = 2
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 36.0
-margin_right = 480.0
-margin_bottom = 336.0
+margin_right = 360.0
+margin_bottom = 376.0
 size_flags_vertical = 3
 
 [node name="Upgrades" parent="MainContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 340.0
-margin_right = 480.0
-margin_bottom = 640.0
+margin_top = 380.0
+margin_right = 360.0
+margin_bottom = 720.0
 size_flags_vertical = 3
 
 [node name="Settings" parent="." instance=ExtResource( 5 )]
@@ -48,5 +48,6 @@ autostart = true
 
 [connection signal="on_settings_pressed" from="MainContainer/HUD" to="." method="_on_HUD_on_settings_pressed"]
 [connection signal="clicked" from="MainContainer/Body" to="." method="_on_Body_clicked"]
+[connection signal="on_first_upgrade" from="MainContainer/Upgrades" to="." method="_on_Upgrades_on_first_upgrade"]
 [connection signal="new_game" from="Settings" to="." method="_on_Settings_new_game"]
 [connection signal="timeout" from="SaveGameTimer" to="." method="_on_SaveGameTimer_timeout"]

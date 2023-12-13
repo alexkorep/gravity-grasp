@@ -18,13 +18,14 @@ mouse_filter = 1
 script = ExtResource( 8 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 468.0
+margin_right = 348.0
 margin_bottom = 988.0
 size_flags_horizontal = 3
 
 [node name="Dust" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_right = 468.0
+margin_right = 348.0
+margin_bottom = 120.0
 body_type = 1
 units = 0
 title = "Dust"
@@ -33,7 +34,7 @@ texture = ExtResource( 10 )
 [node name="Meteoroid" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 margin_top = 124.0
-margin_right = 468.0
+margin_right = 348.0
 margin_bottom = 244.0
 body_type = 2
 title = "Meteoroid"
@@ -45,7 +46,7 @@ source_quantity = 25
 [node name="Asteroid" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 margin_top = 248.0
-margin_right = 468.0
+margin_right = 348.0
 margin_bottom = 368.0
 body_type = 3
 title = "Asteroid"
@@ -57,7 +58,7 @@ source_quantity = 25
 [node name="Moon" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 margin_top = 372.0
-margin_right = 468.0
+margin_right = 348.0
 margin_bottom = 492.0
 body_type = 4
 title = "Moon"
@@ -68,7 +69,7 @@ source_body = 3
 [node name="Planetoid" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 margin_top = 496.0
-margin_right = 468.0
+margin_right = 348.0
 margin_bottom = 616.0
 body_type = 5
 title = "Planetoid"
@@ -80,7 +81,7 @@ source_quantity = 2
 [node name="Planet" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 margin_top = 620.0
-margin_right = 468.0
+margin_right = 348.0
 margin_bottom = 740.0
 body_type = 6
 title = "Planet"
@@ -92,7 +93,7 @@ source_quantity = 2
 [node name="Jupiter" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 margin_top = 744.0
-margin_right = 468.0
+margin_right = 348.0
 margin_bottom = 864.0
 body_type = 7
 title = "Jupiter"
@@ -104,7 +105,7 @@ source_quantity = 10
 [node name="Sun" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 margin_top = 868.0
-margin_right = 468.0
+margin_right = 348.0
 margin_bottom = 988.0
 body_type = 8
 title = "Sun"
@@ -112,3 +113,12 @@ texture = ExtResource( 4 )
 speed = 1.14576e+09
 source_body = 7
 source_quantity = 8
+
+[connection signal="on_body_upgrade" from="VBoxContainer/Dust" to="." method="on_body_upgrade"]
+[connection signal="on_body_upgrade" from="VBoxContainer/Meteoroid" to="." method="on_body_upgrade"]
+[connection signal="on_body_upgrade" from="VBoxContainer/Asteroid" to="." method="on_body_upgrade"]
+[connection signal="on_body_upgrade" from="VBoxContainer/Moon" to="." method="on_body_upgrade"]
+[connection signal="on_body_upgrade" from="VBoxContainer/Planetoid" to="." method="on_body_upgrade"]
+[connection signal="on_body_upgrade" from="VBoxContainer/Planet" to="." method="on_body_upgrade"]
+[connection signal="on_body_upgrade" from="VBoxContainer/Jupiter" to="." method="on_body_upgrade"]
+[connection signal="on_body_upgrade" from="VBoxContainer/Sun" to="." method="on_body_upgrade"]
