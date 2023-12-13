@@ -34,11 +34,8 @@ margin_bottom = 376.0
 size_flags_vertical = 3
 
 [node name="TickerLabel" parent="MainContainer/Body" instance=ExtResource( 6 )]
-anchor_right = 1.0
 margin_bottom = 14.0
-text = "Test"
-align = 1
-num_chars_display = 40
+text = "Click here to collect some space dust. Click here to collect some space dust."
 
 [node name="Upgrades" parent="MainContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
