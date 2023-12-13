@@ -36,43 +36,75 @@ stretch_mode = 6
 
 [node name="Info" type="VBoxContainer" parent="Panel/HBoxContainer"]
 margin_left = 124.0
-margin_right = 456.0
+margin_right = 228.0
 margin_bottom = 116.0
 size_flags_horizontal = 3
 
 [node name="TitleLabel" type="Label" parent="Panel/HBoxContainer/Info"]
-margin_right = 332.0
+margin_right = 104.0
 margin_bottom = 14.0
 mouse_filter = 1
 text = "Title"
 
 [node name="SpeedLabel" type="Label" parent="Panel/HBoxContainer/Info"]
 margin_top = 18.0
-margin_right = 332.0
+margin_right = 104.0
 margin_bottom = 32.0
 mouse_filter = 1
 text = "Speed"
 
 [node name="QuantityLabel" type="Label" parent="Panel/HBoxContainer/Info"]
 margin_top = 36.0
-margin_right = 332.0
+margin_right = 104.0
 margin_bottom = 50.0
 mouse_filter = 1
 text = "Quantity"
 
 [node name="RecepieLabel" type="Label" parent="Panel/HBoxContainer/Info"]
 margin_top = 54.0
-margin_right = 332.0
+margin_right = 104.0
 margin_bottom = 68.0
 mouse_filter = 1
 text = "Recepie"
 
-[node name="UpgradeButton" type="Button" parent="Panel/HBoxContainer/Info"]
-margin_top = 72.0
-margin_right = 332.0
+[node name="Buttons" type="VBoxContainer" parent="Panel/HBoxContainer"]
+margin_left = 232.0
+margin_right = 336.0
+margin_bottom = 116.0
+size_flags_horizontal = 3
+
+[node name="Upgrade0" type="Button" parent="Panel/HBoxContainer/Buttons"]
+margin_right = 104.0
+margin_bottom = 26.0
+mouse_filter = 1
+size_flags_vertical = 3
+text = "+1"
+
+[node name="Upgrade1" type="Button" parent="Panel/HBoxContainer/Buttons"]
+margin_top = 30.0
+margin_right = 104.0
+margin_bottom = 56.0
+mouse_filter = 1
+size_flags_vertical = 3
+text = "+10"
+
+[node name="Upgrade2" type="Button" parent="Panel/HBoxContainer/Buttons"]
+margin_top = 60.0
+margin_right = 104.0
+margin_bottom = 86.0
+mouse_filter = 1
+size_flags_vertical = 3
+text = "+100"
+
+[node name="Upgrade3" type="Button" parent="Panel/HBoxContainer/Buttons"]
+margin_top = 90.0
+margin_right = 104.0
 margin_bottom = 116.0
 mouse_filter = 1
 size_flags_vertical = 3
-text = "Upgrade"
+text = "+1000"
 
-[connection signal="pressed" from="Panel/HBoxContainer/Info/UpgradeButton" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/Buttons/Upgrade0" to="." method="_on_Button_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="Panel/HBoxContainer/Buttons/Upgrade1" to="." method="_on_Button_pressed" binds= [ 10 ]]
+[connection signal="pressed" from="Panel/HBoxContainer/Buttons/Upgrade2" to="." method="_on_Button_pressed" binds= [ 100 ]]
+[connection signal="pressed" from="Panel/HBoxContainer/Buttons/Upgrade3" to="." method="_on_Button_pressed" binds= [ 1000 ]]

@@ -11,10 +11,11 @@ export var description = "Description"
 export var quantity = 0 setget set_quantity
 export var texture: Texture setget set_texture
 export var speed: float = 0 setget set_speed
-export var upgrade_enabled = false setget enable_upgrade
 
 export(CelestialBody) var source_body
 export var source_quantity = 100
+
+var upgrade_buttons = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +23,24 @@ func _ready():
 	set_speed(speed)
 	var RecepieLabel = $Panel/HBoxContainer/Info/RecepieLabel
 	RecepieLabel.text = get_recepie_text()
+	upgrade_buttons = [
+		{
+			'button': $Panel/HBoxContainer/Buttons/Upgrade0,
+			'quantity': 1
+		},
+		{
+			'button': $Panel/HBoxContainer/Buttons/Upgrade1,
+			'quantity': 10
+		},
+		{
+			'button': $Panel/HBoxContainer/Buttons/Upgrade2,
+			'quantity': 100
+		},
+		{
+			'button': $Panel/HBoxContainer/Buttons/Upgrade3,
+			'quantity': 1000
+		},
+	]
 
 func get_recepie_text():
 	var src = get_source_body()
@@ -73,8 +92,8 @@ func set_quantity(val: float):
 	quantity = val
 	QuantityLabel.text = 'Qty: ' + NumberFormatter.format_large_number(quantity)
 
-func _on_Button_pressed():
-	upgrade(1)
+func _on_Button_pressed(qty):
+	upgrade(qty)
 
 func upgrade(qty):
 	var required_source_quantity = source_quantity*qty
@@ -83,10 +102,19 @@ func upgrade(qty):
 		set_quantity(quantity + qty)
 		sibling.set_quantity(sibling.quantity - required_source_quantity)
 
-func enable_upgrade(enabled):
-	var Button = $Panel/HBoxContainer/Info/UpgradeButton
-	Button.disabled = !enabled
-	upgrade_enabled = enabled
+func enable_upgrade_buttons():
+	var sibling = get_source_body()
+	var quantity_available = sibling.quantity
+	for button in upgrade_buttons:
+		var button_control = button['button']
+		var quantity_required_for_button = button['quantity']*source_quantity
+		var enabled = quantity_available >= quantity_required_for_button
+		button_control.disabled = !enabled
+
+func hide_upgrade_buttons():
+	for button in upgrade_buttons:
+		var button_control = button['button']
+		button_control.visible = false
 
 func get_body_for_type(type):
 	var siblings = get_parent().get_children()
@@ -110,10 +138,9 @@ func check_upgrade():
 	# TODO check if can upgrade for qty > 1
 	var sibling = get_source_body()
 	if sibling != null:
-		enable_upgrade(sibling.quantity >= source_quantity)
+		enable_upgrade_buttons()
 	else:
-		var Button = $Panel/HBoxContainer/Info/UpgradeButton
-		Button.visible = false
+		hide_upgrade_buttons()
 
 func get_save_data():
 	var data = {}
