@@ -1,7 +1,7 @@
 extends Control
 
-onready var HUD = $MainContainer/Top/HUD
-onready var Ungrades = $MainContainer/Bottom/Upgrades
+onready var HUD = $MainContainer/HUD
+onready var Ungrades = $MainContainer/Upgrades
 onready var Settings = $Settings
 
 export var save_file_name = "user://save_game.dat"
@@ -13,7 +13,7 @@ func _ready():
 	else:
 		new_game()
 
-func _process(_delta):
+func _process(delta):
 	var spd = get_total_speed()
 	set_speed(spd)
 	pass
@@ -77,11 +77,12 @@ func new_game():
 	for upgrade in Ungrades.get_upgrades():
 		upgrade.reset()
 
-func _on_HUD_show_settings():
-	Settings.show()
-
 func _on_Settings_new_game():
 	new_game()
 
 func _on_SaveGameTimer_timeout():
 	save_game()
+
+
+func _on_HUD_on_settings_pressed():
+	Settings.show()

@@ -51,6 +51,9 @@ func get_total_speed():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	check_upgrade()
+	# Every body produces dust
+	# Calculate how much dust did we produce since last frame
+	# and add it to the dust body
 	var dust_amount = get_total_speed()*delta
 	if dust_amount > 0:
 		var dust_body = get_body_for_type(CelestialBody.DUST)
@@ -94,9 +97,16 @@ func get_body_for_type(type):
 	return null
 
 func get_source_body():
+	"""
+		Returns the body that is required to upgrade this body.
+	"""
 	return get_body_for_type(source_body)
 	
 func check_upgrade():
+	"""
+		Checks if we can upgrade this body.
+		Checks if the source body has enough quantity to upgrade this body.
+	"""
 	# TODO check if can upgrade for qty > 1
 	var sibling = get_source_body()
 	if sibling != null:

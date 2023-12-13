@@ -1,6 +1,6 @@
 extends Control
 
-signal show_settings()
+signal on_settings_pressed()
 
 export var speed: float = 100.0 setget set_speed
 
@@ -9,15 +9,11 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 func set_speed(value: float):
-	var SpeedLabel = $HUDTop/SpeedLabel
-	SpeedLabel.text = 'Dust: ' + NumberFormatter.format_large_number(value) + 'g/s'
+	var SpeedLabel = $Panel/HUDTop/SpeedLabel
+	SpeedLabel.text = NumberFormatter.format_large_number(value) + 'g/s'
+
 
 func _on_SettingsButton_pressed():
-	emit_signal('show_settings')
-	print('Settings button pressed')
+	emit_signal("on_settings_pressed")
+
